@@ -7,12 +7,21 @@
       <br /><br />
       <ul class="list-group">
         <div *ngIf="onlyOdd">
-          <li class="list-group-item" *ngFor="let Onumber of oddNumbers">
+          <li
+            class="list-group-item"
+            [ngClass]="{ odd: Onumber % 2 !== 0 }"
+            [ngStyle]="{ backgroundColor: 'purple' }"
+            *ngFor="let Onumber of oddNumbers"
+          >
             {{ Onumber }}
           </li>
         </div>
         <div *ngIf="!onlyOdd">
-          <li class="list-group-item" *ngFor="let Enumber of evenNumbers">
+          <li
+            class="list-group-item"
+            [ngClass]="{ even: Enumber % 2 === 0 }"
+            *ngFor="let Enumber of evenNumbers"
+          >
             {{ Enumber }}
           </li>
         </div>
