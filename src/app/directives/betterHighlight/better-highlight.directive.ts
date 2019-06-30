@@ -16,19 +16,19 @@ export class BetterHighlightDirective implements OnInit {
     - A directive class has access to DOM elements through injection and that is what
       is being done when we set elRef with a type of ElementRef. Injection is basically
       an easier way to get access to some other classes w/o having to instantiate them
-      outselves.
+      ourselves.
     - Injection occurs as an argument in our constructor function and angular will get these
       new instances for us whenever we create a new directive instance.
-    - Using the private method is a shortcut for setting properites with the same name.
+    - Using the private method is a shortcut for setting properties with the same name.
     - You should use the Renderer for any DOM manipulations, and there are a ton of methods
-      that can be used, just reference the angualr docs.
+      that can be used, just reference the angular docs.
     - Renderer works by implementing callback functions to execute change.
   */
   @Input() defaultColor: string;
   @Input() highlightColor = "cyan";
   backgroundColor = "transparent";
 
-  // setStyle is a method that can chaneg DOM elements for TS file. It taked 4 arguments:
+  // setStyle is a method that can change DOM elements for TS file. It takes 4 arguments:
   // the element you want to change, the css selector, and the value for the selector.
   ngOnInit() {}
   /*
