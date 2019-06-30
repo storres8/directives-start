@@ -3,9 +3,9 @@ import {
   Renderer2,
   OnInit,
   ElementRef,
-  HostListener
+  HostListener,
+  Input
 } from "@angular/core";
-import { createUrlResolverWithoutPackagePrefix } from "@angular/compiler";
 
 @Directive({
   selector: "[appBetterHighlight]"
@@ -24,11 +24,13 @@ export class BetterHighlightDirective implements OnInit {
       that can be used, just reference the angualr docs.
     - Renderer works by implementing callback functions to execute change.
   */
+  @Input() defaultColor: string;
+  @Input() highlightColor = "cyan";
+  backgroundColor = "transparent";
 
   // setStyle is a method that can chaneg DOM elements for TS file. It taked 4 arguments:
   // the element you want to change, the css selector, and the value for the selector.
   ngOnInit() {}
-
   /*
     @HostListener takes a DOM event as an argument in the form of a string. It then executes a CB
     which is usually named the same as the event, but doesn't matter. The CB function can access
@@ -41,16 +43,17 @@ export class BetterHighlightDirective implements OnInit {
       // elref just hold a reference to the element we place our selector in and the .nativeElement
       // method allows us to access the actual HTML element.
       "background-color",
-      "cyan"
+      this.highlightColor
     );
   }
+
   @HostListener("mouseleave") mouseleave(eventData: Event) {
     this.renderer.setStyle(
       this.elRef.nativeElement,
       // elref just hold a reference to the element we place our selector in and the .nativeElement
       // method allows us to access the actual HTML element.
       "background-color",
-      "transparent"
+      this.defaultColor
     );
   }
 }
