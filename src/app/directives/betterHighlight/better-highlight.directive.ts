@@ -1,4 +1,11 @@
-import { Directive, Renderer2, OnInit, ElementRef } from "@angular/core";
+import {
+  Directive,
+  Renderer2,
+  OnInit,
+  ElementRef,
+  HostListener
+} from "@angular/core";
+import { createUrlResolverWithoutPackagePrefix } from "@angular/compiler";
 
 @Directive({
   selector: "[appBetterHighlight]"
@@ -20,13 +27,30 @@ export class BetterHighlightDirective implements OnInit {
 
   // setStyle is a method that can chaneg DOM elements for TS file. It taked 4 arguments:
   // the element you want to change, the css selector, and the value for the selector.
-  ngOnInit() {
+  ngOnInit() {}
+
+  /*
+    @HostListener takes a DOM event as an argument in the form of a string. It then executes a CB
+    which is usually named the same as the event, but doesn't matter. The CB function can access
+    the event data from the event as an argument as shown bellow.
+    @HostListener allows for dynamic change based on user events.
+  */
+  @HostListener("mouseenter") mouseenter(eventData: Event) {
     this.renderer.setStyle(
       this.elRef.nativeElement,
       // elref just hold a reference to the element we place our selector in and the .nativeElement
       // method allows us to access the actual HTML element.
       "background-color",
       "cyan"
+    );
+  }
+  @HostListener("mouseleave") mouseleave(eventData: Event) {
+    this.renderer.setStyle(
+      this.elRef.nativeElement,
+      // elref just hold a reference to the element we place our selector in and the .nativeElement
+      // method allows us to access the actual HTML element.
+      "background-color",
+      "transparent"
     );
   }
 }
